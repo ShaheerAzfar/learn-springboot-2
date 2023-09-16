@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@RestController
+@RequestMapping("students2")
 public class StudentController2 {
 
     //this method is to depict how to send java bean as json
@@ -24,7 +26,7 @@ public class StudentController2 {
     }
 
     //this method is to depict how to send list as json
-    @GetMapping("students2")
+    @GetMapping
     public ResponseEntity<List<Student>> getStudents(){
         List<Student> students = new ArrayList<>();
         students.add(new Student(1,"Zaid","Ali"));
@@ -34,7 +36,7 @@ public class StudentController2 {
     }
 
     // Rest API with Path Variable
-    @GetMapping("students2/{id}/{first-name/{last-name}")
+    @GetMapping("{id}/{first-name/{last-name}")
     public ResponseEntity<Student> studentPathVariable(@PathVariable int id,
                                        @PathVariable("first-name") String firstName,
                                        @PathVariable("last-name") String lastName){
@@ -44,7 +46,7 @@ public class StudentController2 {
 
     // Rest API with Request Parameter
     // http:localhost:8080/students/query?id=1&firstName=Shaheer&lastName=Azfar
-    @GetMapping("students2/query")
+    @GetMapping("query")
     public ResponseEntity<Student> studentRequestVariable(@RequestParam int id,
                                           @RequestParam String firstName,
                                           @RequestParam String lastName){
@@ -54,7 +56,7 @@ public class StudentController2 {
 
     //Rest API that handles POST Request - create new resource
     //@PostMapping and @RequestBody
-    @PostMapping("students2/create")
+    @PostMapping("create")
   //@ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Student> createStudent(@RequestBody Student student){
         System.out.println(student.getId());
@@ -64,7 +66,7 @@ public class StudentController2 {
     }
 
     // Rest API that handles PUT Request - updating existing resource
-    @PutMapping("students2/{id}/update")
+    @PutMapping("{id}/update")
     public ResponseEntity<Student> updateStudent(@RequestBody Student student,@PathVariable("id") int studentId){
         System.out.println(student.getFirstName());
         System.out.println(student.getLastName());
@@ -72,7 +74,7 @@ public class StudentController2 {
     }
 
     // Rest API that handles Delete Request
-    @DeleteMapping("students2/{id}/delete")
+    @DeleteMapping("{id}/delete")
     public ResponseEntity<String> deleteStudent(@PathVariable("id") int studentId){
         System.out.println(studentId);
         return ResponseEntity.ok("Student Deleted Successfully");
