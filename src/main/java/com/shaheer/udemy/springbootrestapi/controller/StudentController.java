@@ -60,10 +60,17 @@ public class StudentController {
     }
 
     // Rest API that handles PUT Request - updating existing resource
-    @PutMapping("student/{id}/update")
+    @PutMapping("students/{id}/update")
     public Student updateStudent(@RequestBody Student student,@PathVariable("id") int studentId){
         System.out.println(student.getFirstName());
         System.out.println(student.getLastName());
         return student;
+    }
+
+    // Rest API that handles Delete Request
+    @DeleteMapping("students/{id}/delete")
+    public String deleteStudent(@PathVariable("id") int studentId){
+        System.out.println(studentId);
+        return "Student Deleted Successfully";
     }
 }
